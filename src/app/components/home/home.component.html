@@ -1,0 +1,46 @@
+<div class="filters container bg-success mt-3 col-lg-6 rounded">
+  <!-- <p *ngIf="searchGames(sort)"><mat-progress-bar mode="indeterminate"></mat-progress-bar></p> -->
+    <mat-form-field class="col-12">
+        <mat-label>Sort</mat-label>
+        <mat-select panelClass="sort-select" [(ngModel)]="sort" (selectionChange)="searchGames(sort)"> 
+            <mat-option value="name">Name</mat-option>
+            <mat-option value="realeased">Realeased</mat-option>
+            <mat-option value="added">Added</mat-option>
+            <mat-option value="created">Created</mat-option>
+            <mat-option value="updated">Updated</mat-option>
+            <mat-option value="rating">Rating</mat-option>
+            <mat-option value="metacritic">Mtacritic</mat-option>
+
+        </mat-select>
+
+    </mat-form-field>  
+</div>
+
+<div class="container mt-5 col-lg-12">
+    <div class="games">  
+        <ng-container *ngFor="let game of games">
+          <div class="game" >
+            <div class="game-thumb-container">
+              <img
+               *ngIf="game.background_image"
+                src="{{ game.background_image }}"
+                alt="thumbnail"
+                class="game-thumbnail"
+              />
+            <p *ngIf="!game.background_image"><img src="assets/bg3.jpg" alt="" style="height:174px;"></p>
+            </div>
+            <div class="game-description">
+              <p class="game-name">{{ game.name }}</p>
+              <!-- <div class="game-platforms">
+                <img
+                 *ngFor="let gamePlatform of game.parent_platforms"            
+                  class="game-platform"
+                  src="assets/platforms/{{ gamePlatform.platform.slug }}.svg"
+                 
+                />
+              </div> -->
+            </div>
+          </div>
+        </ng-container> 
+      </div>
+</div>
