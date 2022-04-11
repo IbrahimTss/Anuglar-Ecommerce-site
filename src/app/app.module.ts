@@ -20,6 +20,9 @@ import { HttpHeadersInterceptor } from './interceptors/http-header.interceptor';
 import { HttpErrorsInterceptor } from './interceptors/http-error.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthguardGuard } from './authguard.guard';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatSelectModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS,
@@ -51,7 +55,8 @@ import { ToastrModule } from 'ngx-toastr';
 
   {provide: HTTP_INTERCEPTORS,
     useClass: HttpErrorsInterceptor,
-  multi : true}
+  multi : true},
+  AuthguardGuard
   ],
   bootstrap: [AppComponent]
 })

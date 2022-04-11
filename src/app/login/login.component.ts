@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
           if(res){
             this.login.valid === true
             this.api.showSuccess('','login sucessfully ')
-
-            this.router.navigate(["navbar"])
+            localStorage.setItem('userData', JSON.stringify(res))
+            this.router.navigate(["/navbar"])
 
           }else{
             this.toastr.error('Check Your Password')

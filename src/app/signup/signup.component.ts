@@ -33,10 +33,11 @@ export class SignupComponent implements OnInit {
         email: new FormControl(this.signUp, [Validators.required,Validators.email]),
         mobile: new FormControl(this.signUp, [Validators.required,Validators.minLength(10)]),
         password: new FormControl(this.signUp, [Validators.required,Validators.minLength(5),Validators.maxLength(8)]),
-
-      })
+         })
     
     }
+    
+    
 
   signnUp(){
 

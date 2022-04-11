@@ -1,18 +1,21 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
 import { Observable, throwError } from "rxjs";
 import {catchError, finalize} from 'rxjs/operators'
 import { LoaderService } from "../Services/loader.service";
 
 @Injectable()
 export class HttpHeadersInterceptor implements HttpInterceptor {
-  constructor(public loaderService: LoaderService) {}
+  constructor(public loaderService: LoaderService,public spinner:NgxSpinnerService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loaderService.isLoading.next(true);
+    
+    // this.loaderService.isLoading.next(true);
+    this.spinner.show();
     req = req.clone({
       setHeaders: {
         'x-rapidapi-key': '7393ec52a3mshb14fe7279160360p19eab9jsn6bd5685f911b',
@@ -29,7 +32,8 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
         return throwError(error.error);
       }),
       finalize(() => {
-        this.loaderService.isLoading.next(false);
+        // this.loaderService.isLoading.next(false);
+        this.spinner.hide();
       })
     );
   }

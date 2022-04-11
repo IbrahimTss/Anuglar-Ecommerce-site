@@ -4,13 +4,17 @@ import { map, Observable } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 import { APIResponse, Game } from '../modules/modules.module';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+  login() {
+    throw new Error('Method not implemented.');
+  }
 
-  constructor(private http : HttpClient,private toastr: ToastrService) { }
+  constructor(private http : HttpClient,private toastr: ToastrService,private router:Router) { }
 
   putdata(data : any){
     return this.http.post<any>("http://192.168.0.121:8000/signup",data)
@@ -20,10 +24,9 @@ export class AppService {
   getdata(data : any){
     return this.http.get<any>("http://192.168.0.121:8000/signup").pipe(
     map((resp : any) => {
-      // console.log('getData',resp.find((i: any) => i.email === data.email && i.password === data.password) )
       return resp.find((i: any) =>
-        i.email === data.email && i.password === data.password
-       )
+        i.email === data.email && i.password === data.password,
+               )
     })
     )
   }
